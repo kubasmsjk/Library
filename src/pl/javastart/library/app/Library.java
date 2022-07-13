@@ -1,6 +1,10 @@
+package pl.javastart.library.app;
+
+import pl.javastart.library.model.Book;
+
 class Library {
     public static void main(String[] args) {
-        final String appName = "Biblioteka v0.4";
+        final String appName = "Biblioteka v0.5";
 
         Book book1 = new Book("W pustyni i w puszczy", "Henryk Sienkiewicz", 2010, 296, "Greg", "9788373271890");
         Book book2 = new Book("Java. Efektywne programowanie. Wydanie II", "Joshua Bloch", 2009, 352, "Helion",
@@ -9,7 +13,7 @@ class Library {
                 2008, 851, "McGraw-Hill Osborne Media");
 
         System.out.print(appName);
-        System.out.println("Ksiazki dostępne w bibliotece:");
+        System.out.println("Ksiazki dostepne w bibliotece:");
         book1.printInfo();
         book2.printInfo();
         book3.printInfo();
