@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class DataReader {
     private Scanner sc = new Scanner(System.in);
 
-    public Book readAndCreateBook(){
+    public Book readAndCreateBook() {
         System.out.println("Tytul: ");
         String title = sc.nextLine();
         System.out.println("Autor: ");
@@ -23,5 +23,15 @@ public class DataReader {
         int pages = sc.nextInt();
         sc.nextLine();
         return new Book(title, author, releaseDate, pages, publisher, isbn);
+    }
+
+    public int getInt(){
+        int number =sc.nextInt();
+        sc.nextLine();
+        return number;
+    }
+
+    public void close() {
+        sc.close();
     }
 }
