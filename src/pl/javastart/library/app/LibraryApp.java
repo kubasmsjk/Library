@@ -1,10 +1,9 @@
 package pl.javastart.library.app;
 
 public class LibraryApp {
+    private static final String APP_NAME = "Biblioteka v0.9";
     public static void main(String[] args) {
-        final String appName = "Biblioteka v0.8";
-        System.out.println(appName);
-
+        System.out.println(APP_NAME);
         LibraryControl libraryControl = new LibraryControl();
         libraryControl.controlloop();
     }
