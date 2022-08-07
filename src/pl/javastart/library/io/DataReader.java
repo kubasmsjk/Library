@@ -1,6 +1,7 @@
 package pl.javastart.library.io;
 
 import pl.javastart.library.model.Book;
+import pl.javastart.library.model.Magazine;
 
 import java.util.Scanner;
 
@@ -17,16 +18,31 @@ public class DataReader {
         System.out.println("ISBN: ");
         String isbn = sc.nextLine();
         System.out.println("Rok wydania: ");
-        int releaseDate = sc.nextInt();
+        int releaseDate = getInt();
         sc.nextLine();
         System.out.println("Ilosc stron: ");
-        int pages = sc.nextInt();
-        sc.nextLine();
+        int pages = getInt();
         return new Book(title, author, releaseDate, pages, publisher, isbn);
     }
 
-    public int getInt(){
-        int number =sc.nextInt();
+    public Magazine readAndCreateMagazine() {
+        System.out.println("Tytul: ");
+        String title = sc.nextLine();
+        System.out.println("Wydawnictwo: ");
+        String publisher = sc.nextLine();
+        System.out.println("Jezyk: ");
+        String language = sc.nextLine();
+        System.out.println("Rok wydania: ");
+        int year = getInt();
+        System.out.println("Miesiac: ");
+        int month = getInt();
+        System.out.println("Dzien: ");
+        int day = getInt();
+        return new Magazine(title, publisher, language, year, month, day);
+    }
+
+    public int getInt() {
+        int number = sc.nextInt();
         sc.nextLine();
         return number;
     }
