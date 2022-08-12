@@ -19,7 +19,6 @@ public class DataReader {
         String isbn = sc.nextLine();
         System.out.println("Rok wydania: ");
         int releaseDate = getInt();
-        sc.nextLine();
         System.out.println("Ilosc stron: ");
         int pages = getInt();
         return new Book(title, author, releaseDate, pages, publisher, isbn);
