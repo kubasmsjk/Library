@@ -1,8 +1,9 @@
 package pl.javastart.library.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Publication {
+public abstract class Publication implements Serializable {
     private int year;
     private String title;
     private String publisher;
