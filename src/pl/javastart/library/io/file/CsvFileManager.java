@@ -23,14 +23,14 @@ public class CsvFileManager implements FileManager {
     }
 
     private void importUsers(Library library) {
-        try (Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                LibraryUser libUser = createUserFromString(line);
-                library.addUser(libUser);
-            }
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(USERS_FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(this::createUserFromString)
+                    .forEach(library::addUser);
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Blad odczytu pliku " + USERS_FILE_NAME);
         }
     }
 
@@ -43,14 +43,14 @@ public class CsvFileManager implements FileManager {
     }
 
     private void importPublications(Library library) {
-        try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                Publication publication = createObjectFromString(line);
-                library.addPublication(publication);
-            }
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(this::createObjectFromString)
+                    .forEach(library::addPublication);
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Blad odczytu pliku " + FILE_NAME);
         }
     }
 
@@ -94,13 +94,14 @@ public class CsvFileManager implements FileManager {
 
     private void exportUsers(Library library) {
         Collection<LibraryUser> users = library.getUsers().values();
-        exportToCsv(users,USERS_FILE_NAME);
+        exportToCsv(users, USERS_FILE_NAME);
     }
 
     private void exportPublications(Library library) {
         Collection<Publication> publications = library.getPublications().values();
-        exportToCsv(publications,FILE_NAME);
+        exportToCsv(publications, FILE_NAME);
     }
+
     private <T extends CsvConvertible> void exportToCsv(Collection<T> collection, String fileName) {
         try (
                 var fileWriter = new FileWriter(USERS_FILE_NAME);
