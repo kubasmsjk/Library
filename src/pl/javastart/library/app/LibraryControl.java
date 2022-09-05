@@ -12,6 +12,7 @@ import pl.javastart.library.model.*;
 
 import java.util.Comparator;
 import java.util.InputMismatchException;
+import java.util.Optional;
 
 public class LibraryControl {
 
@@ -63,6 +64,9 @@ public class LibraryControl {
                 case PRINT_USER:
                     printUsers();
                     break;
+                case FIND_BOOK:
+                    findBook();
+                    break;
                 case EXIT:
                     exit();
                     break;
@@ -70,6 +74,16 @@ public class LibraryControl {
                     printer.printLine("Nie ma takiej opcji, wprowadz ponownie");
             }
         } while (option != Option.EXIT);
+    }
+
+    private void findBook() {
+        printer.printLine("Podaj tytul publikacji:");
+        String title=dataReader.getString();
+        String notFoundMessage="Brak publikacji o takim tytule";
+        library.findPublicationByTitle(title)
+                .map(Publication::toString)
+                .ifPresentOrElse(System.out::println, () -> System.out.println(notFoundMessage));
+
     }
 
     private void printUsers() {
@@ -193,7 +207,8 @@ public class LibraryControl {
         DELETE_BOOK(5, "Usun ksiazke"),
         DELETE_MAGAZINE(6, "Usun magazyn"),
         ADD_USER(7, "Dodaj czytelnika"),
-        PRINT_USER(8, "Wyswietl czytelnikow");
+        PRINT_USER(8, "Wyswietl czytelnikow"),
+        FIND_BOOK(9,"Wyszukaj, ksiazke");
         private final int value;
         private final String description;
 

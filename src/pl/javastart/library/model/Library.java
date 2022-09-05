@@ -15,10 +15,13 @@ public class Library implements Serializable {
     }
 
     public Collection<Publication> getSortedPublications(Comparator<Publication> comparator) {
-
         ArrayList<Publication> list = new ArrayList<>(publications.values());
         list.sort(comparator);
         return list;
+    }
+
+    public Optional<Publication> findPublicationByTitle(String title){
+        return Optional.ofNullable(publications.get(title));
     }
 
     public Map<String, LibraryUser> getUsers() {
